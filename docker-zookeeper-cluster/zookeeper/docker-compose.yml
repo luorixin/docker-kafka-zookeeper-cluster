@@ -1,0 +1,14 @@
+version: '3'
+services:
+    zk-01:
+        image: zookeeper:3.5.5
+        restart: always
+        container_name: zk-01
+        ports:
+            - 2181:2181 # client port
+            - 2888:2888 # follower port
+            - 3888:3888 # election port
+        environment:
+            ZOO_MY_ID: 1 # this zookeeper's id, and others zookeeper node distinguishing
+            ZOO_SERVERS: ${ZOO_SERVERS} # zookeeper services list
+        network_mode: "host"
